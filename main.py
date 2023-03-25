@@ -33,14 +33,16 @@ class LightningDataset(pl.LightningDataModule):
         self.args = args
 
     def setup(self, stage="fit"):
+         import os
+            dss=os.listdir("../input/flash-p2")[1]
         if self.args.dataset == "pororo":
-            import kaggle.input.flash-p2.datasets.pororo as data
+            import dss.pororo as data
         elif self.args.dataset == 'flintstones':
-            import kaggle.input.flash-p2.datasets.flintstones as data
+            import dss.flintstones as data
         elif self.args.dataset == 'vistsis':
-            import kaggle.input.flash-p2.datasets.vistsis as data
+            import dss.vistsis as data
         elif self.args.dataset == 'vistdii':
-            import kaggle.input.flash-p2.datasets.vistdii as data
+            import dss.vistdii as data
         else:
             raise ValueError("Unknown dataset: {}".format(self.args.dataset))
         if stage == "fit":
