@@ -24,7 +24,7 @@ from timm.models.hub import download_cached_file
 class BLIP_Base(nn.Module):
     def __init__(self,
                  med_config='/kaggle/input/flash-p2/models/blip_override/med_config.json',
-                 image_size=32,
+                 image_size=224,
                  vit='base',
                  vit_grad_ckpt=False,
                  vit_ckpt_layer=0,
@@ -195,7 +195,7 @@ def create_vit(vit, image_size, use_grad_checkpointing=False, ckpt_layer=0, drop
     if vit == 'base':
         vision_width = 768
         visual_encoder = VisionTransformer(img_size=image_size, patch_size=16, embed_dim=vision_width, depth=12,
-                                           num_heads=12, use_grad_checkpointing=use_grad_checkpointing,
+                                           num_heads=6, use_grad_checkpointing=use_grad_checkpointing,
                                            ckpt_layer=ckpt_layer,
                                            drop_path_rate=0 or drop_path_rate
                                            )
