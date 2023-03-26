@@ -23,8 +23,7 @@ from fid_utils import calculate_fid_given_features
 from models.blip_override.blip import blip_feature_extractor, init_tokenizer
 from models.diffusers_override.unet_2d_condition import UNet2DConditionModel
 from models.inception import InceptionV3
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:1024"
-
+os.environ['TF_FORCE_GPU_ALLOW_GROWTH']='true'
 
 
 class LightningDataset(pl.LightningDataModule):
@@ -284,6 +283,9 @@ class ARLDM(pl.LightningModule):
         attention_mask = attention_mask.reshape(2, B, V, (src_V + 1) * S)
         images = list()
         for i in range(V):
+            import gc
+            gc.collect()
+            torch.cuda.empty_cache()
             encoder_hidden_states = encoder_hidden_states.reshape(2, B, V, (src_V + 1) * S, -1)
             new_image = self.diffusion(encoder_hidden_states[:, :, i].reshape(2 * B, (src_V + 1) * S, -1),
                                        attention_mask[:, :, i].reshape(2 * B, (src_V + 1) * S),
