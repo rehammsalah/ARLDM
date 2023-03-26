@@ -1,7 +1,7 @@
 import inspect
 import os
 import sys
-sys.path.append('/kaggle/input/flash-p2/models')
+sys.path.append('/kaggle/input/flash-p2/models/blip_override/med_config.json')
 import hydra
 import numpy as np
 import pytorch_lightning as pl
