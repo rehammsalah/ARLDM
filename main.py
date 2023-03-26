@@ -1,7 +1,6 @@
 import inspect
 import os
 import sys
-sys.path.append('/kaggle/input/flash-p2')
 import hydra
 import numpy as np
 import pytorch_lightning as pl
