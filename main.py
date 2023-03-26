@@ -388,7 +388,7 @@ class ARLDM(pl.LightningModule):
         images = torch.stack([self.fid_augment(image) for image in images])
         images = images.type(torch.FloatTensor).to(self.device)
         images = (images + 1) / 2
-        images = F.interpolate(images, size=(299, 299), mode='bilinear', align_corners=False)
+        images = F.interpolate(images, size=(32, 32), mode='bilinear', align_corners=False)
         pred = self.inception(images)[0]
 
         if pred.shape[2] != 1 or pred.shape[3] != 1:
