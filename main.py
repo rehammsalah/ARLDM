@@ -283,8 +283,7 @@ class ARLDM(pl.LightningModule):
         attention_mask = attention_mask.reshape(2, B, V, (src_V + 1) * S)
         images = list()
         for i in range(V):
-            import gc
-            gc.collect()
+            
             torch.cuda.empty_cache()
             encoder_hidden_states = encoder_hidden_states.reshape(2, B, V, (src_V + 1) * S, -1)
             new_image = self.diffusion(encoder_hidden_states[:, :, i].reshape(2 * B, (src_V + 1) * S, -1),
