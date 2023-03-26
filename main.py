@@ -34,15 +34,15 @@ class LightningDataset(pl.LightningDataModule):
 
     def setup(self, stage="fit"):
         import sys
-        sys.path.insert(1, ' /kaggle/input/flash-p2/datasets')
+        sys.path.append('/kaggle/input/flash-p2/datasets')
         if self.args.dataset == "pororo":
-            import datasets.pororo as data
+            import pororo as data
         elif self.args.dataset == 'flintstones':
-            import datasets.flintstones as data
+            import flintstones as data
         elif self.args.dataset == 'vistsis':
-            import datasets.vistsis as data
+            import vistsis as data
         elif self.args.dataset == 'vistdii':
-            import datasets.vistdii as data
+            import vistdii as data
         else:
             raise ValueError("Unknown dataset: {}".format(self.args.dataset))
         if stage == "fit":
