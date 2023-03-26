@@ -24,7 +24,7 @@ from fid_utils import calculate_fid_given_features
 from models.blip_override.blip import blip_feature_extractor, init_tokenizer
 from models.diffusers_override.unet_2d_condition import UNet2DConditionModel
 from models.inception import InceptionV3
-os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:512"
+os.environ["PYTORCH_CUDA_ALLOC_CONF"] = "max_split_size_mb:128"
 
 
 
