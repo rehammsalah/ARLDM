@@ -394,6 +394,7 @@ class ARLDM(pl.LightningModule):
 
 
 def train(args: DictConfig) -> None:
+    torch.cuda.empty_cache()
     dataloader = LightningDataset(args)
     dataloader.setup('fit')
     model = ARLDM(args, steps_per_epoch=dataloader.get_length_of_train_dataloader())
