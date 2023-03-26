@@ -134,7 +134,7 @@ class ARLDM(pl.LightningModule):
         self.time_embeddings = nn.Embedding(5, 768)
         self.mm_encoder = blip_feature_extractor(
             pretrained='https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model_large.pth',
-            image_size=224, vit='large')
+            image_size=32, vit='large')
         self.mm_encoder.text_encoder.resize_token_embeddings(args.get(args.dataset).blip_embedding_tokens)
 
         self.vae = AutoencoderKL.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="vae")
@@ -388,12 +388,12 @@ class ARLDM(pl.LightningModule):
         images = torch.stack([self.fid_augment(image) for image in images])
         images = images.type(torch.FloatTensor).to(self.device)
         images = (images + 1) / 2
-        images = F.interpolate(images, size=(32, 32), mode='bilinear', align_corners=False)
+        images = F.interpolate(images, size=(299, 299), mode='bilinear', align_corners=False)
         pred = self.inception(images)[0]
 
         if pred.shape[2] != 1 or pred.shape[3] != 1:
             pred = F.adaptive_avg_pool2d(pred, output_size=(1, 1))
-        return pred.reshape(-1, 64)
+        return pred.reshape(-1, 2048)
 
 
 def train(args: DictConfig) -> None:
