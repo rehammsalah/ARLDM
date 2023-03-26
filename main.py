@@ -318,7 +318,7 @@ class ARLDM(pl.LightningModule):
         original_images, images = self.sample(batch)
         if self.args.calculate_fid:
             original_images = original_images.cpu().numpy().astype('uint8')
-            original_images = [Image.fromarray(im, 'RGB') for im in original_images]
+            original_images = [Image.fromarray(im.transpose(1,2,0), 'RGB') for im in original_images]
             ori = self.inception_feature(original_images).cpu().numpy()
             gen = self.inception_feature(images).cpu().numpy()
         else:
