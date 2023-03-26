@@ -393,7 +393,7 @@ class ARLDM(pl.LightningModule):
 
         if pred.shape[2] != 1 or pred.shape[3] != 1:
             pred = F.adaptive_avg_pool2d(pred, output_size=(1, 1))
-        return pred.reshape(-1, 2048)
+        return pred.reshape(-1, 64)
 
 
 def train(args: DictConfig) -> None:
@@ -424,7 +424,6 @@ def train(args: DictConfig) -> None:
         callbacks=callback_list,
         strategy=DDPStrategy(find_unused_parameters=False)
     )
-    torch.cuda.empty_cache()
     trainer.fit(model, dataloader, ckpt_path=args.train_model_file)
 
 
