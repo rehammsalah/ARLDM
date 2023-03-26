@@ -420,8 +420,6 @@ def train(args: DictConfig) -> None:
         callbacks=callback_list,
         strategy=DDPStrategy(find_unused_parameters=False)
     )
-    import gc
-    gc.collect()
     torch.cuda.empty_cache()
     trainer.fit(model, dataloader, ckpt_path=args.train_model_file)
 
