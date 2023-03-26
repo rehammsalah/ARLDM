@@ -9,7 +9,7 @@ ckpt_dir: /kaggle/input/checkpoint-directory2 # checkpoint directory
 run_name: first_run # name for this run
 
 # task
-dataset:  vistsis # pororo flintstones vistsis vistdii
+dataset:  vistdii # pororo flintstones vistsis vistdii
 task: visualization  # continuation visualization
 
 # train
