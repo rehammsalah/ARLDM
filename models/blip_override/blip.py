@@ -24,7 +24,7 @@ from timm.models.hub import download_cached_file
 class BLIP_Base(nn.Module):
     def __init__(self,
                  med_config='/kaggle/input/flash-p2/models/blip_override/med_config.json',
-                 image_size=224,
+                 image_size=32,
                  vit='base',
                  vit_grad_ckpt=False,
                  vit_ckpt_layer=0,
