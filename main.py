@@ -92,7 +92,7 @@ class ARLDM(pl.LightningModule):
             else:
                 raise ValueError("Scheduler not supported")
             self.fid_augment = transforms.Compose([
-                transforms.Resize([128, 128]),
+                transforms.Resize([64, 64]),
                 transforms.ToTensor(),
                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
             ])
