@@ -2,7 +2,7 @@
 mode: train  # train sample
 gpu_ids: [0]  # gpu ids
 batch_size: 1  # batch size each item denotes one story
-num_workers: 2  # number of workers
+num_workers: 4  # number of workers
 num_cpu_cores: -1  # number of cpu cores
 seed: 0  # random seed
 ckpt_dir: /kaggle/working/checkpoint-directory2 # checkpoint directory
