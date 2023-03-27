@@ -2,7 +2,7 @@
 mode: train  # train sample
 gpu_ids: [0]  # gpu ids
 batch_size: 1  # batch size each item denotes one story
-num_workers: 1  # number of workers
+num_workers: 4  # number of workers
 num_cpu_cores: -1  # number of cpu cores
 seed: 0  # random seed
 ckpt_dir: /kaggle/working/checkpoint-directory2 # checkpoint directory
@@ -14,7 +14,7 @@ task: visualization  # continuation visualization
 
 # train
 init_lr: 1e-5  # initial learning rate
-warmup_epochs: 1  # warmup epochs
+warmup_epochs: 3  # warmup epochs
 max_epochs: 5  # max epochs
 train_model_file:  # model file for resume, none for train from scratch
 freeze_clip: True  # whether to freeze clip
