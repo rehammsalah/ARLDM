@@ -289,7 +289,7 @@ class ARLDM(pl.LightningModule):
             encoder_hidden_states = encoder_hidden_states.reshape(2, B, V, (src_V + 1) * S, -1)
             new_image = self.diffusion(encoder_hidden_states[:, :, i].reshape(2 * B, (src_V + 1) * S, -1),
                                        attention_mask[:, :, i].reshape(2 * B, (src_V + 1) * S),
-                                       32, 32, self.args.num_inference_steps, self.args.guidance_scale, 0.0)
+                                       512, 512, self.args.num_inference_steps, self.args.guidance_scale, 0.0)
             images += new_image
 
             new_image = torch.stack([self.blip_image_processor(im) for im in new_image]).to(self.device)
