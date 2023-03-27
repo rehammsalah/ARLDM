@@ -23,8 +23,8 @@ class StoryDataset(Dataset):
 
         self.augment = transforms.Compose([
             transforms.ToPILImage(),
-            transforms.Resize(256),
-            transforms.RandomCrop(256) if self.subset == 'train' else transforms.CenterCrop(256),
+            transforms.Resize(128),
+            transforms.RandomCrop(128) if self.subset == 'train' else transforms.CenterCrop(128),
             transforms.ToTensor(),
             transforms.Normalize([0.5], [0.5])
         ]) if self.subset in ['train', 'val'] else transforms.Compose([
