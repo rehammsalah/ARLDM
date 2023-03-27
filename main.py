@@ -92,7 +92,7 @@ class ARLDM(pl.LightningModule):
             else:
                 raise ValueError("Scheduler not supported")
             self.fid_augment = transforms.Compose([
-                transforms.Resize([64, 64]),
+                transforms.Resize([32, 32]),
                 transforms.ToTensor(),
                 transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5)),
             ])
@@ -102,14 +102,14 @@ class ARLDM(pl.LightningModule):
         self.clip_tokenizer = CLIPTokenizer.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="tokenizer")
         self.blip_tokenizer = init_tokenizer()
         self.blip_image_processor = transforms.Compose([
-            transforms.Resize([64, 64]),
+            transforms.Resize([32, 32]),
             transforms.ToTensor(),
             transforms.Normalize([0.48145466, 0.4578275, 0.40821073], [0.26862954, 0.26130258, 0.27577711])
         ])
         self.max_length = args.get(args.dataset).max_length
 
         blip_image_null_token = self.blip_image_processor(
-            Image.fromarray(np.zeros((64, 64, 3), dtype=np.uint8))).unsqueeze(0).float()
+            Image.fromarray(np.zeros((32, 32, 3), dtype=np.uint8))).unsqueeze(0).float()
         clip_text_null_token = self.clip_tokenizer([""], padding="max_length", max_length=self.max_length,
                                                    return_tensors="pt").input_ids
         blip_text_null_token = self.blip_tokenizer([""], padding="max_length", max_length=self.max_length,
@@ -134,7 +134,7 @@ class ARLDM(pl.LightningModule):
         self.time_embeddings = nn.Embedding(5, 768)
         self.mm_encoder = blip_feature_extractor(
             pretrained='https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model_large.pth',
-            image_size=64, vit='large')
+            image_size=32, vit='large')
         self.mm_encoder.text_encoder.resize_token_embeddings(args.get(args.dataset).blip_embedding_tokens)
 
         self.vae = AutoencoderKL.from_pretrained('runwayml/stable-diffusion-v1-5', subfolder="vae")
