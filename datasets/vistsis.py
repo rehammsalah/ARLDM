@@ -23,14 +23,14 @@ class StoryDataset(Dataset):
 
         self.augment = transforms.Compose([
             transforms.ToPILImage(),
-            transforms.Resize(32),
-            transforms.RandomCrop(32) if self.subset == 'train' else transforms.CenterCrop(32),
+            transforms.Resize(128),
+            transforms.RandomCrop(128) if self.subset == 'train' else transforms.CenterCrop(128),
             transforms.ToTensor(),
             transforms.Normalize([0.5], [0.5])
         ]) if self.subset in ['train', 'val'] else transforms.Compose([
             transforms.ToPILImage(),
-            transforms.Resize(32),
-            transforms.CenterCrop(32)
+            transforms.Resize(128),
+            transforms.CenterCrop(128)
         ])
 
         self.dataset = args.dataset
@@ -40,8 +40,8 @@ class StoryDataset(Dataset):
 
         self.blip_image_processor = transforms.Compose([
             transforms.ToPILImage(),
-            transforms.Resize(32),
-            transforms.RandomCrop(32) if self.subset == 'train' else transforms.CenterCrop(32),
+            transforms.Resize(128),
+            transforms.RandomCrop(128) if self.subset == 'train' else transforms.CenterCrop(128),
             transforms.ToTensor(),
             transforms.Normalize([0.48145466, 0.4578275, 0.40821073], [0.26862954, 0.26130258, 0.27577711])
         ])
