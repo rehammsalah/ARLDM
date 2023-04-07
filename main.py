@@ -415,7 +415,7 @@ def train(args: DictConfig) -> None:
 
     trainer = pl.Trainer(
         accelerator='cpu',
-        devices=args.gpu_ids,
+        devices=4,
         max_epochs=args.max_epochs,
         benchmark=True,
         logger=logger,
