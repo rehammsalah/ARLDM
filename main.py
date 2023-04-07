@@ -23,7 +23,6 @@ from fid_utils import calculate_fid_given_features
 from models.blip_override.blip import blip_feature_extractor, init_tokenizer
 from models.diffusers_override.unet_2d_condition import UNet2DConditionModel
 from models.inception import InceptionV3
-os.environ['TF_FORCE_GPU_ALLOW_GROWTH']='true'
 
 
 class LightningDataset(pl.LightningDataModule):
@@ -415,7 +414,7 @@ def train(args: DictConfig) -> None:
     callback_list = [lr_monitor, checkpoint_callback]
 
     trainer = pl.Trainer(
-        accelerator='gpu',
+        accelerator='cpu',
         devices=args.gpu_ids,
         max_epochs=args.max_epochs,
         benchmark=True,
@@ -435,7 +434,7 @@ def sample(args: DictConfig) -> None:
     model = ARLDM.load_from_checkpoint(args.test_model_file, args=args, strict=False)
 
     predictor = pl.Trainer(
-        accelerator='gpu',
+        accelerator='cpu',
         devices=args.gpu_ids,
         max_epochs=-1,
         benchmark=True
