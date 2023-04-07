@@ -434,7 +434,7 @@ def sample(args: DictConfig) -> None:
     model = ARLDM.load_from_checkpoint(args.test_model_file, args=args, strict=False)
 
     predictor = pl.Trainer(
-        accelerator='cpu',
+        accelerator='gpu',
         devices=args.gpu_ids,
         max_epochs=-1,
         benchmark=True
